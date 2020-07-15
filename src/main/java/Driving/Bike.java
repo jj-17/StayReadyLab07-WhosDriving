@@ -1,14 +1,16 @@
 package Driving;
 
 public abstract class Bike implements Drivable {
+
+    
     /**
-     * It is important on a bike that the tire pressure
-     * is monitored closely. The getTirePressure method
-     * should be used to detect if tire inflation is needed
+     * It is important on a bike that the tire pressure is monitored closely. The
+     * getTirePressure method should be used to detect if tire inflation is needed
      *
      * @return pressure in PSI
      */
     public abstract Integer getTirePressure();
+
 
     /**
      * When the inflateTires method is called the
