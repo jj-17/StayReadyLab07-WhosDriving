@@ -3,6 +3,30 @@ package Vehicles;
 import Driving.Car;
 
 public class HondaCivic extends Car {
+
+    private double distanceTraveled;
+    private double distanceTraveledWithOil;
+    private boolean needsOilChange;
+    private double topSpeed;
+
+    public void setDistanceTraveled(double distanceTraveled) {
+        this.distanceTraveled = distanceTraveled;
+    }
+
+    public double getDistanceTraveledWithOil() {
+        return distanceTraveledWithOil;
+    }
+
+    public void setDistanceTraveledWithOil(double distanceTraveledWithOil) {
+        this.distanceTraveledWithOil = distanceTraveledWithOil;
+    }
+
+    public HondaCivic() {
+        this.distanceTraveled = 0;
+        this.distanceTraveledWithOil = 0;
+        this.needsOilChange = false;
+        this.topSpeed = 70.0;
+    }
     /**
      * A civic should need an oil change every
      * 50,000 miles traveled. Once the oil is
@@ -13,7 +37,25 @@ public class HondaCivic extends Car {
      */
     @Override
     public Boolean needsOilChange() {
-        return null;
+        if ((this.getDistanceTraveledWithOil() - this.getDistanceTraveled()) % 50000 >= 0)
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public boolean isNeedsOilChange() {
+        return needsOilChange;
+    }
+
+    public void setNeedsOilChange(boolean needsOilChange) {
+        this.needsOilChange = needsOilChange;
+    }
+
+    public void setTopSpeed(double topSpeed) {
+        this.topSpeed = topSpeed;
     }
 
     /**
@@ -25,7 +67,8 @@ public class HondaCivic extends Car {
      */
     @Override
     public void changeOil() {
-
+        this.setDistanceTraveledWithOil(this.getDistanceTraveled());
+        this.setNeedsOilChange(false);
     }
 
     /**
@@ -37,7 +80,13 @@ public class HondaCivic extends Car {
      */
     @Override
     public Boolean checkEngineLight() {
-        return null;
+        if (this.isNeedsOilChange() == true)
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     /**
@@ -50,7 +99,7 @@ public class HondaCivic extends Car {
      */
     @Override
     public Double getDistanceTraveled() {
-        return null;
+        return this.distanceTraveled;
     }
 
     /**
@@ -59,7 +108,7 @@ public class HondaCivic extends Car {
      */
     @Override
     public Double getTopSpeed() {
-        return null;
+        return this.topSpeed;
     }
 
     /**
@@ -72,6 +121,9 @@ public class HondaCivic extends Car {
      */
     @Override
     public Integer transport(Double distance) {
-        return null;
+        this.setDistanceTraveled(this.getDistanceTraveled() + distance);
+        double traveledInSecs = (  distance / this.getTopSpeed()  ) / 60;
+
+        return (int)traveledInSecs;
     }
 }
